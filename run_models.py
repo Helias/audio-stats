@@ -20,19 +20,22 @@ speakers = [
 
 speakers = ['LA_0012', 'LA_0013', 'LA_0047', 'LA_0023', 'LA_0038']
 
-drop_features = ["AUDIO_FILE_NAME", "label", "SPEAKER_ID", "Unused", "SYSTEM_ID", "label", "duration", "size"]
-query_conditions = '(SYSTEM_ID == "-" | SYSTEM_ID ==  "A07")'
-speaker_condition = ' | '.join(['SPEAKER_ID == "' + speaker + '"' for speaker in speakers])
-query_conditions = '(' + speaker_condition + ')' + " & " + query_conditions
+SYSTEM_IDS = ['A07', 'A10', 'A11', 'A13', 'A14']
 
-# print('loading dataset')
-x_train, y_train, x_test, y_test = imp_dataset("ASVspoof_data.csv", drop_features, query_conditions)
+for system_id in SYSTEM_IDS:
+  drop_features = ["AUDIO_FILE_NAME", "label", "SPEAKER_ID", "Unused", "SYSTEM_ID", "label", "duration", "size"]
+  query_conditions = '(SYSTEM_ID == "-" | SYSTEM_ID ==  "' + system_id + '")'
+  speaker_condition = ' | '.join(['SPEAKER_ID == "' + speaker + '"' for speaker in speakers])
+  query_conditions = '(' + speaker_condition + ')' + " & " + query_conditions
 
-# print('training models')
-trained_models = get_trained_models(x_train, y_train)
+  # print('loading dataset')
+  x_train, y_train, x_test, y_test = imp_dataset("ASVspoof_data.csv", drop_features, query_conditions)
 
-for t_m in trained_models:
-  acc, conf_matrix, y_pred = predict_and_score(t_m["model"], x_test, y_test)
+  # print('training models')
+  trained_models = get_trained_models(x_train, y_train)
 
-  # print(conf_matrix)
-  print(t_m["name"] + "\t ACC: \t\t", str(acc)[:5])
+  for t_m in trained_models[:1]:
+    acc, conf_matrix, y_pred = predict_and_score(t_m["model"], x_test, y_test)
+
+    # print(conf_matrix)
+    print(system_id + " \t" + t_m["name"] + "\t ACC: \t\t", str(acc)[:5])
