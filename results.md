@@ -1,7 +1,12 @@
-10284 samples
-CART ACC: 0.9 EER: 0.5074370709382151
+**10284 samples**, 48 speakers
 
-964 samples
+| Model | Accuracy |
+| ----- | -------- |
+| CART  | 0.9      |
+
+---
+
+**964 samples**, 5 speakers
 
 | Model | Accuracy |
 | ----- | -------- |

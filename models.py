@@ -19,7 +19,6 @@ def get_trained_models(x_train, y_train):
           "name": "CART",
           "model": DecisionTreeClassifier().fit(x_train, y_train)
       },
-
       {
           "name": "SVM",
           "model": svm.NuSVC().fit(x_train, y_train.ravel())
