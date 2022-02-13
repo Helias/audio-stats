@@ -30,7 +30,7 @@ A07, **964 samples**, 5 speakers
 
 Average accuracy generated using 10 iterations classifying audio with synthetic techniques where the bit rate is not discriminant.
 
-System IDs: A07, A10, A11, A13, A14
+System IDs: A07, A10, A11, A13, A14  
 Speakers involved (5): LA_0012, LA_0013, LA_0047, LA_0023, LA_0038
 
 | model    | A07   | A10   | A11   | A13   | A14   |
@@ -75,6 +75,10 @@ Average accuracy generated using 10 iterations classifying audio with synthetic 
 | **GNB**  | 0.865 | 0.847 | 0.795 | 0.899 | 0.749 | 0.477 | 0.602 | 0.559 |
 | **QDA**  | 0.865 | 0.847 | 0.795 | 0.899 | 0.749 | 0.477 | 0.602 | 0.559 |
 | **NB**   | 0.498 | 0.513 | 0.522 | 0.525 | 0.522 | 0.477 | 0.440 | 0.498 |
+
+---
+
+Average accuracy generated using 10 iterations classifying audio with synthetic techniques where the bit rate is not discriminant. (part 2)
 
 **System IDs**: A01, A02, A03, A04, A05, A06  
 **Speakers involved (7)**: LA_0069, LA_0070, LA_0071, LA_0072, LA_0073, LA_0074, LA_0075
