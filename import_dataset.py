@@ -11,6 +11,10 @@ def imp_dataset(dataset_path: str, drop_feature: List[str], conditions: str = No
   if conditions:
     df = df.query(conditions)
 
+  # fix issue "ValueError: Input contains NaN, infinity or a value too large for dtype('float32')."
+  # source: https://github.com/pycaret/pycaret/issues/290#issuecomment-660607984
+  df = df.replace((np.inf, -np.inf, np.nan), 0).reset_index(drop=True)
+
   df = shuffle(df)
 
   # replacing real -> 0 and spoof -> 1

@@ -21,21 +21,23 @@ def predict_and_score(model, x_test, y_test):
 
 # speakers for A07+
 # speakers = ['LA_0012', 'LA_0013', 'LA_0047', 'LA_0023', 'LA_0038']
+
 speakers = ['LA_0069', 'LA_0070', 'LA_0071', 'LA_0072', 'LA_0073', 'LA_0074', 'LA_0075']
 
-# SYSTEM_IDS = ['A07', 'A10', 'A11', 'A13', 'A14']
 SYSTEM_IDS = ['A01', 'A02', 'A03', 'A04', 'A05', 'A06']
+# SYSTEM_IDS = ['A07', 'A10', 'A11', 'A13', 'A14']
 # SYSTEM_IDS = ['A08', 'A09', 'A12', 'A15', 'A16', 'A17', 'A18', 'A19']
 
 
-def parallelize(system_id: str) -> dict:
-    drop_features = ["AUDIO_FILE_NAME", "label", "SPEAKER_ID", "Unused", "SYSTEM_ID", "label", "duration", "size"]
+def parallelize(system_id: str) -> Union[str, dict]:
+    drop_features = ["AUDIO_FILE_NAME", "label", "SPEAKER_ID", "Unused", "SYSTEM_ID", "label", "duration", "size", "spectral_bandwidth"] # "bit_rate",
     query_conditions = '(SYSTEM_ID == "-" | SYSTEM_ID ==  "' + system_id + '")'
     speaker_condition = ' | '.join(['SPEAKER_ID == "' + speaker + '"' for speaker in speakers])
     query_conditions = '(' + speaker_condition + ')' + " & " + query_conditions
 
     # print('loading dataset')
-    x_train, y_train, x_test, y_test = imp_dataset("ASVspoof_data.csv", drop_features, query_conditions)
+    # x_train, y_train, x_test, y_test = imp_dataset("ASVspoof_data.csv", drop_features, query_conditions)
+    x_train, y_train, x_test, y_test = imp_dataset("ASVspoof_all_data.csv", drop_features, query_conditions)
 
     # print('training models')
     trained_models = get_trained_models(x_train, y_train)
@@ -56,15 +58,21 @@ def parallelize(system_id: str) -> dict:
     for t_m in trained_models:
       res[t_m["name"]] /= REPEAT
     
-    return res 
-
-# ncpu = int(pa.helpers.cpu_count() / 2)
-# with pa.multiprocessing.ProcessingPool(ncpu) as p:
-#     results = list(tqdm(p.imap(parallelize, SYSTEM_IDS), total=len(SYSTEM_IDS)))
+    return system_id, res 
 
 resx = {}
-for system_id in SYSTEM_IDS:
-    resx[system_id] = parallelize(system_id)
+ncpu = int(pa.helpers.cpu_count() / 2)
+with pa.multiprocessing.ProcessingPool(ncpu) as p:
+    results = list(tqdm(p.imap(parallelize, SYSTEM_IDS), total=len(SYSTEM_IDS)))
+
+for r in results:
+  system_id = r[0]
+  model_results = r[1]
+
+  resx[system_id] = model_results
+
+# for system_id in SYSTEM_IDS:
+#     resx[system_id] = parallelize(system_id)
 
 # print(resx)
 
@@ -76,3 +84,4 @@ for model in resx[SYSTEM_IDS[0]]:
     print('\t' + str(resx[system_id][model])[:5], end='')
     # print(system_id)
   print()
+
