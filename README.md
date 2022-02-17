@@ -1,8 +1,13 @@
 **Features of the dataset:**
 
-spectrum,mean_frequency,peak_frequency,frequencies_std,amplitudes_cum_sum,mode_frequency,median_frequency,frequencies_q25,frequencies_q75,iqr,freqs_skewness,freqs_kurtosis,spectral_entropy,spectral_flatness,spectral_centroid,spectral_spread,spectral_rolloff,energy,rms,zcr,spectral_mean,spectral_rms,spectral_std,spectral_variance,meanfun,minfun,maxfun,meandom,mindom,maxdom,dfrange,modindex,bit_rate
+spectrum,mean_frequency,peak_frequency,frequencies_std,amplitudes_cum_sum,  
+mode_frequency,median_frequency,frequencies_q25,frequencies_q75,iqr,  
+freqs_skewness,freqs_kurtosis,spectral_entropy,  
+spectral_flatness,spectral_centroid,spectral_spread,spectral_rolloff,  
+energy,rms,zcr,spectral_mean,spectral_rms,spectral_std,spectral_variance,  
+meanfun,minfun,maxfun,meandom,mindom,maxdom,dfrange,modindex,bit_rate
 
-**spectrum features**
+**spectrum features**  
 signal,mfcc,imfcc,bfcc,lfcc,lpc,lpcc,msrcc,ngcc,psrcc,plp,rplp,gfcc
 
 **rows with the asterisk (\*) have all the features WITH the bit_rate, all rows without the asterisk (\*) have no bit_rate feature**
