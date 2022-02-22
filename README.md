@@ -27,6 +27,8 @@ Here the synthetic technique where the bit_rate is not discriminating
 | SYSTEM ID | A07, A10, A11, A13, A14                                       |
 | Speakers  | LA_0012, LA_0013, LA_0047, LA_0023, LA_0038                   |
 
+Accuracy of the related models with 10 iterations (the accuracy is the average of the 10 iterations).
+
 | Model        | A01   | A02   | A03   | A04   | A05   | A06   | A08   | A09   | A12   | A15   | A16   | A17   | A18   | A19   | A07   | A10   | A11   | A13   | A14   |
 | ------------ | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
 | **CART** 1   | 0.929 | 0.998 | 1.0   | 0.849 | 0.947 | 0.759 | 0.911 | 0.938 | 0.896 | 0.844 | 0.773 | 0.761 | 0.920 | 0.697 | 0.871 | 0.892 | 0.856 | 0.987 | 0.905 |
