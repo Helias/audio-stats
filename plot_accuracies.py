@@ -116,7 +116,7 @@ def parallel_plot(system_id_idx: int) -> None:
         _to = 6 * (model_idx+1)
         curr_res = res[_from:_to]
 
-        plt.plot([idx + _from for idx in range(len(curr_res))], curr_res, '*', color=colors[model_idx])
+        plt.bar([idx + _from for idx in range(len(curr_res))], curr_res, color=colors[model_idx])
 
     plt.legend(labels=models)
     plt.savefig("system_ids_accuracies/" + system_id + ".png")
